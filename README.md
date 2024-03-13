@@ -29,14 +29,21 @@ To use Ledalab for EDA analysis, the custom version of LedaLab is made under the
 ## Output structure
 ### Exported CSV File
 After executing this script, a new CSV file will be generated containing batch-processed participant data for each metric. The structure of the CSV file may vary slightly depending on the metric, but it will always include raw values and differences from baseline. Below is an example structure for HR data of a random participant from an experiment with 15 scenes:
-#### 1. participant_id: unique participant id given to differentiate each individual while anonymizing their personal information.
-#### 2. session_id: this information is for experiments that have multiple sessions for within-subject comparisons or continuous data collection over a certain duration of time.
-#### 3. scene_id: this information is for experiments that have multiple scenes visualized for each participant as part of the VR experiment.
+#### 1. participant_id: 
+Unique participant ID given to differentiate each individual while anonymizing their personal information.
+#### 2. session_id: 
+Information on session number or ID for experiments with multiple sessions for within-subject comparisons or continuous data collection over a certain duration of time.
+#### 3. scene_id: 
+Information on scene number or ID for experiments that show multiple scenes for each participant as part of the experimental structure.
  - 'baseline' is during a resting period prior to the experiment to collect resting HR for each participant for calculating HRV data.
-#### 4. scene_order: this contains scene order information for experiments with pre-defined order for scene presentation or for randomized order of presentation.
-#### 5. n_data_points: number of data points collected for the specific segment of the session (in this case for each scene number)
-#### 6. min, max, range, median, mean, std: values for raw HR for each segment
-#### 7. mean_diff_baseline: bsais for HRV data in BPM, calculating changes in HR from each participant's resting HR measured during the baseline period.
+#### 4. scene_order:
+Scene order information for experiments with pre-defined order for scene presentation or for randomized order of presentation.
+#### 5. n_data_points: 
+Number of data points collected for the specific segment of the session (in this case for each scene number)
+#### 6. min, max, range, median, mean, std: 
+Minimum, maximum, range, median, mean, and standard deviation values for raw HR for each segment
+#### 7. mean_diff_baseline: 
+Bsais for HRV data in BPM, calculating changes in HR from each participant's resting HR measured during the baseline period. But a separate CSV file will be created focusing on HRV in terms of IBI and RMSSD.
 
 ```bash
     participant_id    session_id      scene_id      scene_order    scene_duration    n_data_points     min       max      range    median     mean       std      mean_diff_baseline
