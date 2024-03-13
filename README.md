@@ -5,7 +5,8 @@ This repository serves as a  guide for exploring the relationship between stress
 >**Note:** In this experimental workflow, event markers are derived from eye tracking data gathered using the Pico Neo Pro 3 Eye VR headset, which monitors scene changes and timestamps during the experiment. This process is adaptable for various experimental designs, allowing for straightforward modifications to the event marker extraction method in the data processing workflow to suit specific experimental procedures.
 
 ## Data Analysis and Processing
-To produce all necessary output files, follow these steps:
+In this directory, we have a folder called [Programs_for_E4](Programs_for_E4) containing all the source codes used for data processing.
+To produce all necessary output files, download the entire package and follow these steps:
 
 >**Note:** Every script file used in this workflow contains detailed notes within comments to explain each step of the code for improved clarity.
 
