@@ -7,6 +7,8 @@ This repository serves as a  guide for exploring the relationship between stress
 ## Data Analysis and Processing
 To produce all necessary output files, follow these steps:
 
+>**Note:** Each script file contains detailed notes within comments to explain each step of the code for clarity.
+
 ### Initial Data Processing
 In this MATLAB-based workflow for processing data, we first extract the start and end times from each Empatica recording to create time vectors for every segment of raw data. To manage the varying sampling rates of the E4 device, we align data epochs by adjusting the sampling rates for EDA and skin temperature data to 4 Hz, while maintaining HR data at 1 Hz, and averaging the IBI for each epoch. VR headset timestamps, in UTC, are integrated with E4 data to pinpoint event markers and identify participant IDs. The data is then sorted by participant, and batch processing calculates metrics like HR and skin temperature changes from the baseline, average IBI deviations, and RMSSD from the baseline.
 
