@@ -14,15 +14,15 @@ In this MATLAB-based workflow for processing data, we first extract the start an
 
 The Empatica E4 data is processed using the [script_gen_csv.m](script_gen_csv.m) file.
 1. Simply run the [script_gen_csv.m](script_gen_csv.m) script to create the result files.
-2. Once the script is done processing, you will get a folder [results](results) with the processed data.
+2. Once the script is done processing, a folder [results](results) will be generated with the processed data.
 
 ### Ledalab for EDA analysis
 For analyzing EDA, we utilize the continuous decomposition analysis (CDA) technique via the Ledalab V.3.4.9 toolbox, adhering to default settings for response windows (1-4 seconds post-stimulus), minimum amplitude thresholds (0.01 μS), and employing smoothing methods to calculate the mean skin conductance response (SCR), skin conductance level (SCL) fluctuations, and overall skin conductance (SC) for each participant. These metrics, alongside their deviations from the baseline, are extracted for further statistical analysis.
 
-To use Ledalab for EDA analysis, you can use the custom version of LedaLab that is available in the [ledalab-349](ledalab-349) folder. This version of Ledalab has been modified to work with the E4 data and newer versions of MATLAB.
+To use Ledalab for EDA analysis, the custom version of LedaLab is made under the [ledalab-349](ledalab-349) folder. This version of Ledalab has been modified to work with the E4 data and newer versions of MATLAB.
 1. The first step is to collect the EDA data files for batch processing. After running [script_gen_csv.m](script_gen_csv.m), the EDA data files will become available in the [data_batch_for_ledalab](data_batch_for_ledalab) folder.
-2. Navigate in MATLAB into the [data_batch_ledalab_output](data_batch_ledalab_output) folder and run the [script_leda_lab_analysis.m](script_leda_lab_analysis.m) script. This will process the EDA data files in batch mode with the settings in the script. Note that Ledalab will dump the result files in the current working directory, which is why we wanted to change directory earlier. Otherwise, you may manually copy all the generated files named `_era.mat` int o that folder
-3. Then, you can run [script_gen_csv_eda.m](script_gen_csv_eda.m) to generate the output CV files.
+2. Navigate in MATLAB into the [data_batch_ledalab_output](data_batch_ledalab_output) folder and run the [script_leda_lab_analysis.m](script_leda_lab_analysis.m) script. This will process the EDA data files in batch mode with the settings in the script. Note that Ledalab will export the result files in the current working directory, which is why it is recommended to modify the directory prior. Otherwise, it is possible to manually copy all the generated files named `_era.mat` into the correct folder
+3. Run [script_gen_csv_eda.m](script_gen_csv_eda.m) to generate the output CSV files.
 
 ### Output structure:
 #### 1. earliest:
