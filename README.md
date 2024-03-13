@@ -30,3 +30,25 @@ To use Ledalab for EDA analysis, the custom version of LedaLab is made under the
 ### Exported CSV File
 After executing this script, a new CSV file will be generated containing batch-processed participant data for each metric. The structure of the CSV file may vary slightly depending on the metric, but it will always include raw values and differences from baseline. Below is an example structure for HR data of a random participant from an experiment with 15 scenes:
 #### 1. participant_id:
+As an example for HR, you get for the first participant a table. This
+
+```bash
+    participant_id    session_id      scene_id      scene_order    scene_duration    n_data_points     min       max      range    median     mean       std      mean_diff_baseline
+    ______________    __________    ____________    ___________    ______________    _____________    ______    ______    _____    ______    ______    _______    __________________
+          1               1         {'baseline'}         0              298               150         80.095     84.95    4.855    82.263    82.338     1.2954              NaN
+          1               1         {'1'       }        11               90                46          80.88      85.2     4.32     81.89    82.502     1.4095          0.16361
+          1               1         {'2'       }        14               86                44         80.675    83.475      2.8    82.585    82.153    0.97305         -0.18495
+          1               1         {'3'       }        10               75                38          83.16     84.75     1.59     83.96    83.916    0.44829           1.5782
+          1               1         {'4'       }         6              104                53          80.74     86.83     6.09    83.765     83.72     1.7393           1.3819
+          1               1         {'5'       }         4               82                42         81.925    85.925        4     84.67    84.229      1.353           1.8912
+          1               1         {'6'       }         5               80                41          82.62     87.48     4.86     84.76    84.747     1.3504           2.4091
+          1               1         {'7'       }        15               74                38         83.435     84.91    1.475    84.028    84.113    0.46631           1.7753
+          1               1         {'8'       }         3               94                48          82.65     87.79     5.14    85.635    85.526     1.7262           3.1883
+          1               1         {'9'       }         2               86                44          83.09     87.76     4.67    84.888    84.961     1.1539           2.6231
+          1               1         {'10'      }         7               84                43             82    85.885    3.885    83.705    83.846     1.2231           1.5078
+          1               1         {'11'      }         9              102                52          81.16     84.04     2.88     82.21    82.348      0.767          0.01004
+          1               1         {'12'      }        13              104                53         81.595    86.055     4.46     83.86    83.627     1.1203           1.2891
+          1               1         {'13'      }         1              127                64          81.25     85.05      3.8    82.558    82.692    0.83095          0.35413
+          1               1         {'14'      }        12               94                48          82.84    86.265    3.425    84.078     84.35     1.0619           2.0114
+          1               1         {'15'      }         8              124                63          81.37     85.94     4.57    84.315    83.944     1.7012            1.606
+```
