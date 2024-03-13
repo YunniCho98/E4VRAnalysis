@@ -27,7 +27,10 @@ To use Ledalab for EDA analysis, the custom version of LedaLab is made under the
 3. Run [script_gen_csv_eda.m](script_gen_csv_eda.m) to generate the output CSV files.
 
 ### Output structure:
-#### Raw E4 Results
+#### Exported CSV File processed for each metric (example shown below is for HR)
+##### 1. earliest:
+
+#### Description on the raw E4 data
 ##### 1. earliest:
 - **Description:** Contains information about the earliest recorded data.
 - **Type:** 1x2 vector.
