@@ -10,14 +10,14 @@ To produce all necessary output files, download the entire package and follow th
 
 >**Note:** Every script file used in this workflow contains detailed notes within comments to explain each step of the code for improved clarity.
 
-### Initial Data Processing
+### (1) Initial Data Processing
 In this MATLAB-based workflow for processing data, we first extract the start and end times from each Empatica recording to create time vectors for every segment of raw data. To manage the varying sampling rates of the E4 device, we align data epochs by adjusting the sampling rates for EDA and skin temperature data to 4 Hz, while maintaining HR data at 1 Hz, and averaging the IBI for each epoch. VR headset timestamps, in UTC, are integrated with E4 data to pinpoint event markers and identify participant IDs. The data is then sorted by participant, and batch processing calculates metrics like HR and skin temperature changes from the baseline, average IBI deviations, and RMSSD from the baseline.
 
 The Empatica E4 data is processed using the [script_gen_csv.m](script_gen_csv.m) file.
 1. Simply run the [script_gen_csv.m](script_gen_csv.m) script to create the result files.
 2. Once the script is done processing, a folder [results](results) will be generated with the processed data.
 
-### Ledalab for EDA analysis
+### (2) Ledalab for EDA analysis
 For analyzing EDA, we utilize the continuous decomposition analysis (CDA) technique via the Ledalab V.3.4.9 toolbox, adhering to default settings for response windows (1-4 seconds post-stimulus), minimum amplitude thresholds (0.01 μS), and employing smoothing methods to calculate the mean skin conductance response (SCR), skin conductance level (SCL) fluctuations, and overall skin conductance (SC) for each participant. These metrics, alongside their deviations from the baseline, are extracted for further statistical analysis.
 
 >**Note:** Ledalab software has been modified to ensure compatibility with Matlab 2023 version, while maintaining protection under the GNU General Public License.
@@ -27,11 +27,11 @@ To use Ledalab for EDA analysis, the custom version of LedaLab is made under the
 2. Navigate in MATLAB into the [data_batch_ledalab_output](data_batch_ledalab_output) folder and run the [script_leda_lab_analysis.m](script_leda_lab_analysis.m) script. This will process the EDA data files in batch mode with the settings in the script. Note that Ledalab will export the result files in the current working directory, which is why it is recommended to modify the directory prior. Otherwise, it is possible to manually copy all the generated files named `_era.mat` into the correct folder
 3. Run [script_gen_csv_eda.m](script_gen_csv_eda.m) to generate the output CSV files.
 
-### Output structure
-#### Exported CSV File
+## Output structure
+### Exported CSV File
 After executing this script, a new CSV file will be generated containing batch-processed participant data for each metric. The structure of the CSV file may vary slightly depending on the metric, but it will always include raw values and differences from baseline. Below is an example structure for HR data of a random participant from an experiment with 15 scenes:
 
-##### 1. earliest:
+#### 1. participant_id:
 
 ### Explanation on the raw E4 data structure
 #### 1. earliest:
