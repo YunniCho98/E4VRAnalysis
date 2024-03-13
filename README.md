@@ -32,7 +32,7 @@ After executing this script, a new CSV file will be generated containing batch-p
 - **participant_id**: Unique identifier assigned to each individual to distinguish them while anonymizing their personal information.
 - **session_id**: Information on the session number for experiments with multiple sessions, facilitating within-subject comparisons or continuous data collection over a specific time duration.
 - **scene_id**: Identification of the scene number for experiments featuring multiple scenes for each participant within the experimental setup.
-    - 'baseline' refers to the resting period before the experiment, during which resting HR data for each participant is collected.
+    - '*baseline*' refers to the resting period before the experiment, during which resting HR data for each participant is collected.
 - **scene_order**: Scene order information for experiments with pre-defined presentation sequence or randomized order.
 - **n_data_points**: Number of data points collected for the specific segment of the session (in this case, for each scene number).
 - **min, max, range, median, mean, std**: Minimum, maximum, range, median, mean, and standard deviation values for raw HR for each segment.
