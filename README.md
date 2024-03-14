@@ -13,7 +13,7 @@ To produce all necessary output files, download the entire package and follow th
 In this MATLAB-based workflow for processing data, we first extract the start and end times from each Empatica recording to create time vectors for every segment of raw data. To manage the varying sampling rates of the E4 device, we align data epochs by adjusting the sampling rates for EDA and skin temperature data to 4 Hz, while maintaining HR data at 1 Hz, and averaging the IBI for each epoch. VR headset timestamps, in UTC, are integrated with E4 data to pinpoint event markers and identify participant IDs. The data is then sorted by participant, and batch processing calculates metrics like HR and skin temperature changes from the baseline, average IBI deviations, and RMSSD from the baseline.
 
 The Empatica E4 data is processed using the [script_gen_csv.m](script_gen_csv.m) file.
-1. To ensure proper loading of all functions and files, execute 'startup' within the Matlab environment from the current directory.
+1. To ensure proper loading of all functions and files, execute '*startup*' within the Matlab environment from the current directory.
 2. Run the [script_gen_csv.m](script_gen_csv.m) script to generate the result files.
 3. Once the script is done processing, a folder named '*results*' will be created containing the processed data.
 
