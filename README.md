@@ -14,7 +14,7 @@ In this MATLAB-based workflow for processing data, we first extract the start an
 
 The Empatica E4 data is processed using the [script_gen_csv.m](script_gen_csv.m) file.
 1. Simply run the [script_gen_csv.m](script_gen_csv.m) script to create the result files.
-2. Once the script is done processing, a folder [results](results) will be generated with the processed data.
+2. Once the script is done processing, a folder '*results*' will be generated with the processed data.
 
 ### (2) Ledalab for EDA analysis
 For analyzing EDA, we utilize the continuous decomposition analysis (CDA) technique via the Ledalab V.3.4.9 toolbox, adhering to default settings for response windows (1-4 seconds post-stimulus), minimum amplitude thresholds (0.01 μS), and employing smoothing methods to calculate the mean skin conductance response (SCR), skin conductance level (SCL) fluctuations, and overall skin conductance (SC) for each participant. These metrics, alongside their deviations from the baseline, are extracted for further statistical analysis.
