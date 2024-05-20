@@ -1,3 +1,19 @@
+% Copyright (c) 2024 Yunni Cho, EPFL
+% =======================================================================
+% This program is free software: you can redistribute it and/or
+% modify it under the terms of theGNU Lesser General Public License
+% as published by the Free Software Foundation, either version 3 of
+% the License, or (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+% Lesser General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with this program. If not, see <https://www.gnu.org/licenses/>.
+% ======================================================================
+
 %script_gen_csv_eda.m: Script to generate .csv files from .mat files containing LEDALAB output
 % That is, this script reads .mat files containing LEDALAB output, and generates summary .csv files
 
