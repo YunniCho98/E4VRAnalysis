@@ -59,3 +59,17 @@ After executing this script, a new CSV file will be generated containing batch-p
           1               1         {'14'      }        12               94                48          82.84    86.265    3.425    84.078     84.35     1.0619           2.0114
           1               1         {'15'      }         8              124                63          81.37     85.94     4.57    84.315    83.944     1.7012            1.606
 ```
+
+## License, Copyrights and Acknowledgements
+### Copyright (c) 2024 Yunni Cho, EPFL
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License
+as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.
+If not, see <https://www.gnu.org/licenses/>.
+
+### Acknowledgements
+This work was funded by EPFL and the Swiss National Science Foundation (SNSF Grant #200021_197178) as part of the research project entitled "Outside seen from inside out: Impact of views and daylight composition on our visual experience."
