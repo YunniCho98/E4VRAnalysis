@@ -71,5 +71,12 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General 
 You should have received a copy of the GNU General Public License along with this program.
 If not, see <https://www.gnu.org/licenses/>.
 
+#### Ledalab
+Copyright (C) 2016 Mathias Benedek and Christian Kaernbach
+
+References:
+Benedek, M. & Kaernbach, C. (2010). A continuous measure of phasic electrodermal activity. Journal of Neuroscience Methods, 190, 80-91. 
+Benedek, M. & Kaernbach, C. (2010). Decomposition of skin conductance data by means of nonnegative deconvolution. Psychophysiology, 47, 647-658.
+
 ### Acknowledgements
 This work was funded by EPFL and the Swiss National Science Foundation (SNSF Grant #200021_197178) as part of the research project entitled "Outside seen from inside out: Impact of views and daylight composition on our visual experience."
