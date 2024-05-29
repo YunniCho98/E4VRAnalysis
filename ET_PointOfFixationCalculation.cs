@@ -5,11 +5,14 @@ namespace EyeMap_Application.Engines;
 
 internal static class PointOfFixationCalculation
 {
+        // Define constants
         private const int DEFAULT_MAX_ANGLE = 5;
         private const long MIN_TIMESTAMP_DIFF = 5_000_000; // 10_000_000 = 1 second
 
+        // Function to calculate points of fixation
         public static IEnumerable<PointOfFixation> CalculatePointOfFixations(List<EyeGazeData> AllEyeGazeData, double maxAngle = DEFAULT_MAX_ANGLE)
         {
+                // Check if input data is empty
                 if (AllEyeGazeData.Count == 0)
                         return Enumerable.Empty<PointOfFixation>();
 
@@ -18,13 +21,14 @@ internal static class PointOfFixationCalculation
                 var streak = 0;
                 long startTimestamp = 0;
                 var origins = new List<(double, double)>();
-
+                
+                // Iterate through all eye gaze data points
                 for (var index = 0; index < AllEyeGazeData.Count - 1; index += 1)
                 {
-                        // If Time between this and next data is too time streatched
+                        // Check if time difference to next data point exceeds threshold
                         if (AllEyeGazeData[index + 1].Timestamp - AllEyeGazeData[index].Timestamp > ThreshHoldValues.Frequency)
                         {
-                                // If datas before where a "Point of Fixation" add it to the results
+                                // If currently tracking a streak of fixations
                                 if (streak != 0)
                                 {
                                         var timestampDifference = AllEyeGazeData[index].Timestamp - startTimestamp;
@@ -34,16 +38,16 @@ internal static class PointOfFixationCalculation
                                                 results.Add(new PointOfFixation(originX, originY, streak, timestampDifference));
                                         }
                                 }
-                                // Reset and continue for next data
+                                // Reset tracking variables
                                 startTimestamp = 0;
                                 origins.Clear();
                                 streak = 0;
                                 continue;
                         }
 
-                        // Calculate the dispertion between this and next data
+                        // Calculate angle dispersion between current and next data point
                         var dispertionAngle = CalculateDispertion(AllEyeGazeData[index].Vector, AllEyeGazeData[index + 1].Vector);
-                        // Acceptable dispertion, continue the streak
+                        // If dispersion angle is within acceptable range
                         if (dispertionAngle < maxAngle)
                         {
                                 if (startTimestamp == 0)
@@ -51,7 +55,7 @@ internal static class PointOfFixationCalculation
                                 origins.Add((AllEyeGazeData[index].EstimationX, AllEyeGazeData[index].EstimationY));
                                 streak += 1;
                         }
-                        // If not, but there was a streak, add pof to the results and reset streak
+                        // If dispersion angle exceeds max angle but a streak was ongoing
                         else if (streak != 0)
                         {
                                 var timestampDifference = AllEyeGazeData[index].Timestamp - startTimestamp;
@@ -60,7 +64,8 @@ internal static class PointOfFixationCalculation
                                         var (originX, originY) = Moy.Calculate(origins);
                                         results.Add(new PointOfFixation(originX, originY, streak, timestampDifference));
                                 }
-
+                                
+                                // Reset tracking variables
                                 startTimestamp = 0;
                                 origins.Clear();
                                 streak = 0;
@@ -71,6 +76,7 @@ internal static class PointOfFixationCalculation
         }
 
 
+        // Function to calculate dispersion between two vectors
         private static double CalculateDispertion(Vector3D a, Vector3D b)
         {
                 return Math.Acos(
