@@ -1,13 +1,17 @@
 # Empatica E4 and Pico Neo Pro 3 Eye VR Headset: A Guide to Physiological and Fixation Point Data Processing
 ***Summary***:
-This repository serves as a  guide for exploring the relationship between stress, arousal, autonomic nervous system behavior, and various physiological indicators measured by the Empatica E4 wearable device. It focuses on parameters such as skin temperature, heart rate (HR), heart rate variability (HRV) - specifically analyzing the inter-beat interval (IBI) and the root mean square of successive differences (RMSSD) to evaluate parasympathetic nervous system activity - and electrodermal activity (EDA), including detailed examination of the skin conductance response (SCR), skin conductance level (SCL), and total skin conductance (SC). Additionally, it includes methods for processing eye-tracking data from the Pico Neo Pro 3 Eye VR headset to extract fixation points, which are essential for understanding visual attention and gaze behavior.
+This repository serves as a  guide for exploring the relationship between attention, stress, arousal, autonomic nervous system behavior, and various physiological indicators using the Pico Neo Pro 3 Eye VR headset and the Empatica E4 wearable device. It provides a detailed workflow, including the necessary scripts and instructions, to enable replication and adaptation of the analysis for different experimental setups and VR headsets.
 
->**Note:** In this experimental workflow, event markers are derived from eye tracking data gathered using the Pico Neo Pro 3 Eye VR headset, which monitors scene changes and timestamps during the experiment. This process is adaptable for various experimental designs, allowing for straightforward modifications to the event marker extraction method in the data processing workflow to suit specific experimental procedures.
+>**Note:** In this experimental workflow, event markers are derived from eye tracking data collected using the Pico Neo Pro 3 Eye VR headset, which monitors scene changes and timestamps during the experiment. This process is adaptable for various experimental designs, allowing for straightforward modifications to the event marker extraction method in the data processing workflow to suit specific experimental procedures. Every script file used in this workflow includes detailed comments that explain each step of the code, ensuring clarity and ease of understanding.
 
-## Data Analysis and Processing
+#### Part 1: Processing and Analyzing Physiological Data from Empatica E4
+This part focuses on processing and analyzing physiological data from the Empatica E4 device. It covers parameters such as skin temperature, heart rate (HR), and heart rate variability (HRV) by specifically analyzing inter-beat interval (IBI) and the root mean square of successive differences (RMSSD) to evaluate parasympathetic nervous system activity. It also includes electrodermal activity (EDA), with a detailed examination of the skin conductance response (SCR), skin conductance level (SCL), and total skin conductance (SC).
+
+#### Part 2: Processing Eye-Tracking Data from Pico Neo Pro 3 Eye VR Headset
+This part provides methods for processing eye-tracking data from the Pico Neo Pro 3 Eye VR headset to extract fixation points. Fixation points are essential for understanding where and for how long a participant is focusing their gaze, which is crucial for assessing attention levels, visual salience, and gaze patterns.
+
+## Part 1. Physiological Data Analysis and Processing
 To produce all necessary output files, download the entire package and follow these steps:
-
->**Note:** In this directory, every script file used in this workflow contains detailed notes within comments to explain each step of the code for improved clarity.
 
 ### (1) Initial Data Processing
 In this MATLAB-based workflow for processing data, we first extract the start and end times from each Empatica recording to create time vectors for every segment of raw data. To manage the varying sampling rates of the E4 device, we align data epochs by adjusting the sampling rates for EDA and skin temperature data to 4 Hz, while maintaining HR data at 1 Hz, and averaging the IBI for each epoch. VR headset timestamps, in UTC, are integrated with E4 data to pinpoint event markers and identify participant IDs. The data is then sorted by participant, and batch processing calculates metrics like HR and skin temperature changes from the baseline, average IBI deviations, and RMSSD from the baseline.
@@ -27,12 +31,8 @@ To use Ledalab for EDA analysis, the custom version of LedaLab is made under the
 2. Navigate in MATLAB into the '*data_batch_ledalab_output*' folder and run the [script_leda_lab_analysis.m](script_leda_lab_analysis.m) script. This will process the EDA data files in batch mode with the settings in the script. Note that Ledalab will export the result files in the current working directory, which is why it is recommended to modify the directory prior. Otherwise, it is possible to manually copy all the generated files named `_era.mat` into the correct folder
 3. Run [script_gen_csv_eda.m](script_gen_csv_eda.m) to generate the output CSV files.
 
-### (3) Eye-Tracking Data Processing
-In this part of the workflow, we process the eye-tracking data to identify fixation points. Fixations are essential for understanding where and for how long a participant is focusing their gaze, which is crucial for various experimental designs.
-
-
-## Output structure
-### Exported CSV File
+### (3) Output structure
+#### Exported CSV File
 After executing this script, a new CSV file will be generated containing batch-processed participant data for each metric. The structure of the CSV file may vary slightly depending on the metric, but it will always include raw values and differences from baseline. Below is an example structure for HR data of a random participant from an experiment with 15 scenes:
 - **participant_id**: Unique identifier assigned to each individual to distinguish them while anonymizing their personal information.
 - **session_id**: Information on the session number for experiments with multiple sessions, facilitating within-subject comparisons or continuous data collection over a specific time duration.
@@ -64,6 +64,32 @@ After executing this script, a new CSV file will be generated containing batch-p
           1               1         {'15'      }         8              124                63          81.37     85.94     4.57    84.315    83.944     1.7012            1.606
 ```
 
+## Part 2. Eye-Tracking Data Processing
+In this part of the workflow, several code files are provided as guides for extracting essential eye-tracking measurements (ETMs) from a VR headset and processing this data to identify fixation points. Given that each VR experimental setup demands a unique virtual environment design and platform configuration, these codes are intended to be adaptable, allowing users to modify and tweak them for different experimental setups. Below is the process followed for an experiment involving multiple virtual scenes using the Pico Neo Pro 3 Eye Headset, set up in a Unity3D Engine platform.
+
+### (1) Initial Data Processing
+To obtain essential eye-tracking metrics (gaze point, vector, and directional vectors), the Software Development Kit (SDK) from Pico was utilized (PICO Unity Integration SDK in version 2.5.0.). Initially, data output rates from the Pico Neo Pro 3 Eye VR headset's ET-Controller varied between 10 and 15 data points per second. To capture the dynamic eye movements accurately, we standardized the rates to a consistent 60Hz. This uniformity allowed for seamless comparisons across different VR scenes and transitions. To address the inconsistent data rates, we developed a C# algorithm that normalized the data stream to 60Hz by interpolating or decimating data points based on timestamps. By interpolating, we are able to introduce data points with accurately calculated vectors to bridge gaps, thus maintaining a continuous temporal flow of gaze data.
+
+### (2) Fixation Point Identification
+The processed Eye-tracking data is then analyzed to identify fixation points - specific locations where participants' gaze lingered - and their durations utilizing dispersion-based algorithms, specifically the Identification by Dispersion Threshold (I-DT) method. This technique identifies fixation points by detecting clusters of gaze points that remain constant in position and time, within a predefined dispersion threshold. In our analysis, fixations were recognized as clusters of gaze points within a 5° spatial dispersion threshold for at least one second, using a moving window technique for evaluation. Additionally, by integrating gaze and head position data, we calculated the dispersion angle (θ) between successive gaze points. A fixation was identified when the dispersion angle stayed within the 5° threshold for a second, enabling us to delineate significant fixation events.
+
+### (3) Output structure
+When exporting the fixing points to CSV, the file can be structured like below:
+
+| Name             | Description                                        | Type |
+| ---------------- | -------------------------------------------------- | ---- |
+| Number of fixation points | Number of points contained in the fixing point     | Int  |
+| Fixation Duration         | Duration in seconds on the fixing point            | Int  |
+| X                | Position X of the fixing point (center)            | Int  |
+| Y                | Y position of the fixing point (center)            | Int  |
+(Int is a number between -2,147,483,648 and 2,147,483,647)
+
+***Duration***
+The defined duration is in seconds
+This will be the time difference between the first point and the last
+
+Or: `T2 - T1` where `T1` is the very first point and `T2` the very last
+
 ## License, Copyrights and Acknowledgements
 ### Copyright (c) 2024 Yunni Cho, EPFL
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License
@@ -77,6 +103,11 @@ If not, see <https://www.gnu.org/licenses/>.
 
 #### Ledalab
 Copyright (C) 2016 Mathias Benedek and Christian Kaernbach
+
+#### Unity3D Engine
+***Reference***: J. K. Haas, “A History of the Unity Game Engine,” Worcester Polytechnic Institute, Tech. Rep., 2014.
+
+Copyright (C) Unity Technologies ApS ("Unity")
 
 ### Acknowledgements
 This work was funded by EPFL and the Swiss National Science Foundation (SNSF Grant #200021_197178) as part of the research project entitled "Outside seen from inside out: Impact of views and daylight composition on our visual experience."
