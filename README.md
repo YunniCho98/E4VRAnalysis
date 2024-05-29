@@ -1,6 +1,6 @@
-# Empatica E4 and Pico Neo Pro 3 Eye VR Headset
+# Empatica E4 and Pico Neo Pro 3 Eye VR Headset: A Guide to Physiological and Fixation Point Data Processing
 ***Summary***:
-This repository serves as a  guide for exploring the relationship between stress, arousal, autonomic nervous system behavior, and various physiological indicators measured by the Empatica E4 wearable device. It focuses on parameters such as skin temperature, heart rate (HR), heart rate variability (HRV) - specifically analyzing the inter-beat interval (IBI) and the root mean square of successive differences (RMSSD) to evaluate parasympathetic nervous system activity - and electrodermal activity (EDA), including detailed examination of the skin conductance response (SCR), skin conductance level (SCL), and total skin conductance (SC).
+This repository serves as a  guide for exploring the relationship between stress, arousal, autonomic nervous system behavior, and various physiological indicators measured by the Empatica E4 wearable device. It focuses on parameters such as skin temperature, heart rate (HR), heart rate variability (HRV) - specifically analyzing the inter-beat interval (IBI) and the root mean square of successive differences (RMSSD) to evaluate parasympathetic nervous system activity - and electrodermal activity (EDA), including detailed examination of the skin conductance response (SCR), skin conductance level (SCL), and total skin conductance (SC). Additionally, it includes methods for processing eye-tracking data from the Pico Neo Pro 3 Eye VR headset to extract fixation points, which are essential for understanding visual attention and gaze behavior.
 
 >**Note:** In this experimental workflow, event markers are derived from eye tracking data gathered using the Pico Neo Pro 3 Eye VR headset, which monitors scene changes and timestamps during the experiment. This process is adaptable for various experimental designs, allowing for straightforward modifications to the event marker extraction method in the data processing workflow to suit specific experimental procedures.
 
@@ -26,6 +26,10 @@ To use Ledalab for EDA analysis, the custom version of LedaLab is made under the
 1. The first step is to collect the EDA data files for batch processing. After running [script_gen_csv.m](script_gen_csv.m), the EDA data files will become available in the '*data_batch_for_ledalab*' folder.
 2. Navigate in MATLAB into the '*data_batch_ledalab_output*' folder and run the [script_leda_lab_analysis.m](script_leda_lab_analysis.m) script. This will process the EDA data files in batch mode with the settings in the script. Note that Ledalab will export the result files in the current working directory, which is why it is recommended to modify the directory prior. Otherwise, it is possible to manually copy all the generated files named `_era.mat` into the correct folder
 3. Run [script_gen_csv_eda.m](script_gen_csv_eda.m) to generate the output CSV files.
+
+### (3) Eye-Tracking Data Processing
+In this part of the workflow, we process the eye-tracking data to identify fixation points. Fixations are essential for understanding where and for how long a participant is focusing their gaze, which is crucial for various experimental designs.
+
 
 ## Output structure
 ### Exported CSV File
